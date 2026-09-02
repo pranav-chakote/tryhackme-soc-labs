@@ -1,46 +1,49 @@
-# 🔍 Exploring SPL with Splunk
+# 🔍 Exploring SPL | Splunk Lab Documentation
 
 ## 📌 Overview
 
-This repository documents my hands-on learning and practice with **Splunk Search Processing Language (SPL)**.
+This repository documents my hands-on completion of the **Exploring SPL** lab on **TryHackMe**.
 
-The project focuses on exploring Windows event logs and learning how to search, filter, transform, analyze, and visualize data using SPL. These fundamental skills are important for Security Operations Center (SOC) analysts and cybersecurity professionals who work with Security Information and Event Management (SIEM) platforms.
+The lab focuses on learning and practicing the fundamentals of **Splunk Search Processing Language (SPL)** using Windows event logs. During the lab, I performed searches, filtered events, manipulated fields, analyzed log data, and created visualizations.
 
----
+This documentation is part of my hands-on cybersecurity and SOC Analyst learning portfolio.
 
-## 🎯 Objectives
-
-The main objectives of this lab were to:
-
-- Search and explore Windows event logs
-- Understand Splunk indexes
-- Explore available hosts using Data Summary
-- Filter events using Event IDs
-- Use Boolean operators
-- Perform wildcard searches
-- Select specific fields from events
-- Remove duplicate results
-- Rename fields
-- Sort and reverse search results
-- Limit results using `head` and `tail`
-- Perform statistical analysis using `stats`
-- Create visualizations using `chart`
+> **Note:** This is documentation of a TryHackMe lab completed for educational and hands-on learning purposes. The lab content and environment are provided by TryHackMe.
 
 ---
 
-## 🛠️ Tools and Technologies
+## 🎯 Lab Objectives
 
+During this lab, I practiced:
+
+- Searching indexed Windows logs
+- Exploring data using Splunk Data Summary
+- Filtering events using Event IDs
+- Using Boolean search conditions
+- Performing wildcard searches
+- Selecting specific fields
+- Removing duplicate results
+- Renaming fields
+- Sorting and reversing search results
+- Using `head` and `tail`
+- Performing statistical analysis
+- Creating charts and visualizations
+
+---
+
+## 🛠️ Tools & Technologies
+
+- **TryHackMe**
 - **Splunk**
 - **Search Processing Language (SPL)**
 - **Windows Event Logs**
-- **TryHackMe**
 
 ---
 
-# 📂 Project Structure
+# 📂 Documentation Structure
 
 ```text
-splunk-spl-fundamentals/
+exploring-spl/
 │
 ├── README.md
 │
@@ -63,9 +66,9 @@ splunk-spl-fundamentals/
 
 ---
 
-# 🔎 Lab Activities
+# 🔎 Lab Walkthrough
 
-## 1️⃣ Initial Search
+## 1. Initial Search
 
 ### SPL Query
 
@@ -73,25 +76,21 @@ splunk-spl-fundamentals/
 index=windowslogs
 ```
 
-This query searches and displays all available events stored in the `windowslogs` index.
-
-### Screenshot
+This query searches all available events in the `windowslogs` index.
 
 ![Initial Search](screenshots/01_initial-search-windowslogs.png)
 
 ---
 
-## 2️⃣ Exploring Hosts Using Data Summary
+## 2. Exploring Available Hosts
 
-The Splunk **Data Summary** feature was used to explore the available hosts and data sources.
+The **Data Summary** feature was used to explore the available data and hosts.
 
-### Screenshot
-
-![Data Summary Hosts](screenshots/02_data-summary-host.png)
+![Data Summary](screenshots/02_data-summary-host.png)
 
 ---
 
-## 3️⃣ Filtering Events Using EventID
+## 3. Filtering Events Using EventID
 
 ### SPL Query
 
@@ -99,15 +98,13 @@ The Splunk **Data Summary** feature was used to explore the available hosts and 
 index=windowslogs EventID=1
 ```
 
-This query filters the Windows logs and displays events with `EventID=1`.
-
-### Screenshot
+This query filters the results to display events with `EventID=1`.
 
 ![EventID Filter](screenshots/03_operator-eventid-filter.png)
 
 ---
 
-## 4️⃣ Using Boolean AND Operator
+## 4. Boolean AND Search
 
 ### SPL Query
 
@@ -115,18 +112,13 @@ This query filters the Windows logs and displays events with `EventID=1`.
 index=windowslogs EventID=1 User=*James*
 ```
 
-This query searches for events where both conditions are satisfied:
-
-- `EventID=1`
-- The username matches `James`
-
-### Screenshot
+This query searches for events that match both conditions.
 
 ![Boolean AND](screenshots/04_operator-boolean-and.png)
 
 ---
 
-## 5️⃣ Wildcard Search
+## 5. Wildcard Search
 
 ### SPL Query
 
@@ -134,15 +126,13 @@ This query searches for events where both conditions are satisfied:
 index=windowslogs cyber*
 ```
 
-The wildcard character `*` is used to search for terms that begin with `cyber`.
-
-### Screenshot
+The wildcard character `*` is used to search for matching terms.
 
 ![Wildcard Search](screenshots/05_operator-wildcard-cyber.png)
 
 ---
 
-## 6️⃣ Using the Table and Reverse Commands
+## 6. Table and Reverse Commands
 
 ### SPL Query
 
@@ -152,17 +142,13 @@ index=windowslogs
 | reverse
 ```
 
-The `table` command selects specific fields from the search results.
+The `table` command displays selected fields, while `reverse` reverses the result order.
 
-The `reverse` command reverses the order of the results.
-
-### Screenshot
-
-![Table Reverse](screenshots/06_table-reverse.png)
+![Table and Reverse](screenshots/06_table-reverse.png)
 
 ---
 
-## 7️⃣ Removing Duplicate Results
+## 7. Removing Duplicate Hostnames
 
 ### SPL Query
 
@@ -173,17 +159,13 @@ index=windowslogs
 | reverse
 ```
 
-The `dedup` command removes duplicate values based on the specified field.
-
-In this case, duplicate `Hostname` values are removed.
-
-### Screenshot
+The `dedup` command removes duplicate values from the specified field.
 
 ![Dedup Hostname](screenshots/07_dedup-hostname.png)
 
 ---
 
-## 8️⃣ Using the Fields Command
+## 8. Fields Command
 
 ### SPL Query
 
@@ -192,15 +174,13 @@ index=windowslogs
 | fields EventID Hostname SourceName
 ```
 
-The `fields` command keeps only the specified fields in the search results.
-
-### Screenshot
+The `fields` command displays only the specified fields.
 
 ![Fields Command](screenshots/08_fields-command.png)
 
 ---
 
-## 9️⃣ Renaming a Field
+## 9. Rename Command
 
 ### SPL Query
 
@@ -210,41 +190,29 @@ index=windowslogs
 | rename Hostname as Host
 ```
 
-The `rename` command changes the displayed field name.
-
-In this example:
-
-```text
-Hostname → Host
-```
-
-### Screenshot
+The `rename` command changes the field name from `Hostname` to `Host`.
 
 ![Rename Command](screenshots/09_rename-command.png)
 
 ---
 
-## 🔟 Sorting Search Results
+## 10. Sorting Results
 
 ### SPL Query
 
 ```spl
 index=windowslogs
 | table _time EventID Hostname SourceName
-| sort - _time
+| sort -_time
 ```
 
-The `sort` command organizes the results.
-
-The minus sign (`-`) sorts the events in descending order, showing newer events first.
-
-### Screenshot
+The `sort` command organizes the search results. The `-` indicates descending order.
 
 ![Sort Command](screenshots/10_sort-command.png)
 
 ---
 
-## 1️⃣1️⃣ Using Head and Tail Commands
+## 11. Head and Tail Commands
 
 ### Head
 
@@ -253,7 +221,7 @@ index=windowslogs
 | head 10
 ```
 
-The `head` command returns the first specified number of events.
+The `head` command returns the first specified number of results.
 
 ### Tail
 
@@ -262,15 +230,13 @@ index=windowslogs
 | tail 10
 ```
 
-The `tail` command returns the last specified number of events.
-
-### Screenshot
+The `tail` command returns the last specified number of results.
 
 ![Head and Tail](screenshots/11_head-tail-command.png)
 
 ---
 
-## 1️⃣2️⃣ Counting Events by Host
+## 12. Statistical Analysis
 
 ### SPL Query
 
@@ -279,17 +245,13 @@ index=windowslogs
 | stats count by host
 ```
 
-The `stats` command performs statistical analysis.
-
-This query counts the number of events associated with each host.
-
-### Screenshot
+The `stats` command is used to perform statistical analysis. This query counts events grouped by host.
 
 ![Stats Count by Host](screenshots/12_stats-count-by-host.png)
 
 ---
 
-## 1️⃣3️⃣ Creating a Chart
+## 13. Creating a Chart
 
 ### SPL Query
 
@@ -298,29 +260,25 @@ index=windowslogs
 | chart count(EventID) by Image
 ```
 
-The `chart` command aggregates data based on the specified field.
-
-This query analyzes Event IDs based on the associated process image.
-
-### Screenshot
+The `chart` command aggregates the data for analysis and visualization.
 
 ![Chart EventID by Image](screenshots/13_chart-eventid-by-image.png)
 
 ---
 
-# 🧠 SPL Commands Learned
+# 🧠 SPL Commands Practiced
 
 | Command | Purpose |
 |---|---|
-| `index` | Searches data from a specific Splunk index |
+| `index` | Searches a specific Splunk index |
 | `table` | Displays selected fields |
-| `fields` | Includes specified fields in the results |
+| `fields` | Includes selected fields |
 | `dedup` | Removes duplicate values |
 | `rename` | Renames a field |
-| `sort` | Sorts search results |
-| `reverse` | Reverses the result order |
-| `head` | Returns the first specified number of results |
-| `tail` | Returns the last specified number of results |
+| `sort` | Sorts results |
+| `reverse` | Reverses result order |
+| `head` | Returns the first results |
+| `tail` | Returns the last results |
 | `stats` | Performs statistical analysis |
 | `chart` | Aggregates data for visualization |
 
@@ -328,31 +286,29 @@ This query analyzes Event IDs based on the associated process image.
 
 # 🔐 SOC Analyst Relevance
 
-Splunk and SPL are important for SOC analysts because security teams regularly need to:
+SPL is an important skill for SOC analysts because SIEM platforms such as Splunk are used to investigate and analyze security events.
 
-- Search through large volumes of logs
-- Investigate security events
-- Filter suspicious activity
-- Analyze user and process activity
-- Identify patterns in security data
-- Count and aggregate security events
-- Investigate endpoint activity
-- Create dashboards and visualizations
+The skills practiced in this lab are relevant to:
 
-These skills provide a foundation for working with SIEM platforms and performing security monitoring and incident investigation.
+- Log analysis
+- Event investigation
+- Security monitoring
+- Threat hunting
+- Data filtering
+- Identifying suspicious activity
+- Event aggregation
+- Security data visualization
 
 ---
 
 # 🎓 Lab Completion
 
-The Splunk lab was successfully completed.
+The TryHackMe lab was successfully completed.
 
-**Completion Details:**
+**Lab Completion:**
 
-- Tasks Completed: **8**
-- Points Earned: **152**
-
-### Screenshot
+- ✅ Tasks Completed: 8
+- 🏆 Points Earned: 152
 
 ![Room Completed](screenshots/14_room-completed.png)
 
@@ -360,39 +316,22 @@ The Splunk lab was successfully completed.
 
 # 📚 Key Takeaways
 
-Through this hands-on lab, I gained practical experience with:
+After completing this lab, I gained hands-on experience with:
 
-- Splunk fundamentals
-- SPL query syntax
-- Searching Windows event logs
-- Event filtering
-- Boolean operators
-- Wildcard searches
+- Basic Splunk navigation
+- SPL search syntax
+- Windows event log analysis
+- Filtering and querying security logs
 - Field manipulation
-- Removing duplicate events
-- Sorting search results
+- Data aggregation
 - Statistical analysis
-- Data visualization
+- Basic data visualization
+
+This lab helped strengthen my foundational understanding of how a SOC Analyst can use Splunk to search, filter, and investigate security-related logs.
 
 ---
 
-# 🚀 Future Improvements
-
-I plan to continue developing my Splunk and SOC skills by exploring:
-
-- Failed login detection
-- Brute-force attack detection
-- Suspicious PowerShell activity
-- Process execution analysis
-- Detection engineering
-- Splunk dashboards
-- Correlation searches
-- MITRE ATT&CK mapping
-- Incident investigation workflows
-
----
-
-## 👤 Author
+# 👤 Author
 
 **Pranav Bharat Chakote**
 
@@ -400,6 +339,6 @@ Aspiring SOC Analyst | Cybersecurity Enthusiast
 
 ---
 
-## ⭐ Learning Goal
+## ⚠️ Disclaimer
 
-This repository represents my hands-on journey of learning **Splunk Search Processing Language (SPL)** and building foundational skills for a career in **Security Operations Center (SOC)** and cybersecurity.
+This repository is intended for **educational and portfolio documentation purposes**. The lab environment and original learning material belong to **TryHackMe**. The documentation, screenshots, and notes in this repository represent my personal hands-on learning and lab completion.
